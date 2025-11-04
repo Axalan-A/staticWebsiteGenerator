@@ -1,8 +1,6 @@
 import unittest
 
-import htmlnode
 from textnode import TextNode, TextType
-from htmlnode import LeafNode
 
 class TextNodeConversion(unittest.TestCase):
     def test_text(self):
