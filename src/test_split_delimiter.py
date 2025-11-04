@@ -1,3 +1,4 @@
+from typing import Text
 import unittest
 from split_delimiter import split_nodes_delimiter
 from textnode import TextNode, TextType
@@ -11,5 +12,30 @@ class TestDelimiterSplit(unittest.TestCase):
             TextNode("This is text with a ", TextType.TEXT),
             TextNode("code block", TextType.CODE_TEXT),
             TextNode(" word", TextType.TEXT),
+        ]
+        self.assertEqual(expected, new_nodes)
+
+    def test_closure(self):
+        node = TextNode(
+            text="This is text with an *unclosed bold", text_type=TextType.TEXT
+        )
+        self.assertRaises(
+            ValueError, lambda: split_nodes_delimiter([node], "*", TextType.BOLD_TEXT)
+        )
+
+    def test_multipleNodes(self):
+        node1 = TextNode("*Bold!* Hello!", TextType.TEXT)
+        node2 = TextNode("Also *bold!*", TextType.TEXT)
+        node3 = TextNode("This is *the last* bold", TextType.TEXT)
+        nodes = [node1, node2, node3]
+        new_nodes = split_nodes_delimiter(nodes, "*", TextType.BOLD_TEXT)
+        expected = [
+            TextNode("Bold!", TextType.BOLD_TEXT),
+            TextNode(" Hello!", TextType.TEXT),
+            TextNode("Also ", TextType.TEXT),
+            TextNode("bold!", TextType.BOLD_TEXT),
+            TextNode("This is ", TextType.TEXT),
+            TextNode("the last", TextType.BOLD_TEXT),
+            TextNode(" bold", TextType.TEXT),
         ]
         self.assertEqual(expected, new_nodes)
