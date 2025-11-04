@@ -12,7 +12,7 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
                 raise ValueError("invalid format. delimitter not closed")
             # Oh wait. The delimited point will always be an even index
             for block in range(len(split_text)):
-                if split_text[block].text == "":
+                if split_text[block] == "":
                     continue
                 if block % 2 == 1:
                     new_nodes.append(TextNode(split_text[block], text_type=text_type))
