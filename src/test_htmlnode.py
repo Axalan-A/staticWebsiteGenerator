@@ -15,4 +15,14 @@ class TestHTMLNode(unittest.TestCase):
         self.assertEqual(actual, expected)
 
     def test_props(self):
-        pass
+        node = HTMLNode(props = {"href": "https://www.google.com", 
+                                 "target": "_blank"})
+        expected = " href=\"https://www.google.com\" target=\"_blank\""
+        actual = node.props_to_html()
+        self.assertEqual(expected, actual)
+
+    def test_noprops(self):
+        node = HTMLNode()
+        expected = ""
+        actual = node.props_to_html()
+        self.assertEqual(expected, actual)
