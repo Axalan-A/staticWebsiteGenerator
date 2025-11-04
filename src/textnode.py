@@ -29,7 +29,7 @@ class TextNode:
     def __repr__(self):
         return f"TextNode({self.text}, {self.text_type.value}, {self.url})"
 
-    def text_node_to_html_node(self, props=None):
+    def text_node_to_html_node(self, props=None) -> LeafNode:
         match self.text_type:
             case TextType.TEXT:
                 return LeafNode(None, self.text)
@@ -42,6 +42,10 @@ class TextNode:
             case TextType.LINK:
                 if props is not None:
                     return LeafNode("a", self.text, props={"href": props["href"]})
+                else:
+                    raise Exception("Missing properties")
             case TextType.IMAGE:
                 if props is not None:
-                    return LeafNode("img", value=None, props={"src": props["src"], "alt":props["alt"]})
+                    return LeafNode("img", self.text, props={"src": props["src"], "alt":props["alt"]})
+                else:
+                    raise Exception("Missing properties")
