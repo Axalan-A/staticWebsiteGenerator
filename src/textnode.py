@@ -1,6 +1,7 @@
 from enum import Enum
 from htmlnode import LeafNode
 
+
 class TextType(Enum):
     TEXT = "text"
     BOLD_TEXT = "bold"
@@ -46,6 +47,10 @@ class TextNode:
                     raise Exception("Missing properties")
             case TextType.IMAGE:
                 if props is not None:
-                    return LeafNode("img", self.text, props={"src": props["src"], "alt":props["alt"]})
+                    return LeafNode(
+                        "img",
+                        self.text,
+                        props={"src": props["src"], "alt": props["alt"]},
+                    )
                 else:
                     raise Exception("Missing properties")

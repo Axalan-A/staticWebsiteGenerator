@@ -2,6 +2,7 @@ import unittest
 
 from textnode import TextNode, TextType
 
+
 class TestTextNode(unittest.TestCase):
     def test_eq(self):
         node = TextNode("This is a text node", TextType.BOLD_TEXT)
@@ -10,9 +11,11 @@ class TestTextNode(unittest.TestCase):
 
     def test_noteq(self):
         node = TextNode("This has a url", TextType.LINK, url="tester.com")
-        node2 = TextNode("This is a url too! But different text", TextType.LINK, url="tester.com")
+        node2 = TextNode(
+            "This is a url too! But different text", TextType.LINK, url="tester.com"
+        )
         self.assertNotEqual(node, node2)
-     
+
     def test_blankURLeq(self):
         node = TextNode("This is the same url", TextType.LINK)
         node2 = TextNode("This is the same url", TextType.LINK)
@@ -27,6 +30,7 @@ class TestTextNode(unittest.TestCase):
         node = TextNode("Hello! I'm text!", TextType.BOLD_TEXT)
         node2 = TextNode("Hello! I'm text!", TextType.ITALIC_TEXT)
         self.assertNotEqual(node, node2)
+
 
 if __name__ == "__main__":
     unittest.main()

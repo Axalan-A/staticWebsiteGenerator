@@ -2,6 +2,7 @@ import unittest
 
 from htmlnode import ParentNode, LeafNode
 
+
 class TestParentNode(unittest.TestCase):
     def test_to_html_with_children(self):
         child_node = LeafNode("span", "child")
@@ -15,7 +16,7 @@ class TestParentNode(unittest.TestCase):
         self.assertEqual(
             parent_node.to_html(),
             "<div><span><b>grandchild</b></span></div>",
-    )
+        )
 
     def test_no_children(self):
         parent_node = ParentNode("b", children=None)
@@ -26,6 +27,5 @@ class TestParentNode(unittest.TestCase):
         child2 = LeafNode("a", "This one's a link", {"href": "link.com"})
         child3 = LeafNode("p", "And then a closing paragraph")
         parent_node = ParentNode("div", children=[child1, child2, child3])
-        expected = "<div><p>Hello! First paragraph</p><a href=\"link.com\">This one's a link</a><p>And then a closing paragraph</p></div>"
+        expected = '<div><p>Hello! First paragraph</p><a href="link.com">This one\'s a link</a><p>And then a closing paragraph</p></div>'
         self.assertEqual(expected, parent_node.to_html())
-

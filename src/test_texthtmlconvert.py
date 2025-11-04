@@ -2,6 +2,7 @@ import unittest
 
 from textnode import TextNode, TextType
 
+
 class TextNodeConversion(unittest.TestCase):
     def test_text(self):
         node = TextNode("This is a text node", TextType.TEXT)
@@ -29,10 +30,10 @@ class TextNodeConversion(unittest.TestCase):
 
     def test_link(self):
         node = TextNode("This a link node", TextType.LINK)
-        html_node = node.text_node_to_html_node(props = {"href": "www.testlink.com"})
+        html_node = node.text_node_to_html_node(props={"href": "www.testlink.com"})
         self.assertEqual(html_node.tag, "a")
         self.assertEqual(html_node.value, "This a link node")
-        self.assertEqual(html_node.props, {"href":"www.testlink.com"})
+        self.assertEqual(html_node.props, {"href": "www.testlink.com"})
 
     def test_linkerror(self):
         node = TextNode("This a link node", TextType.LINK)
@@ -40,12 +41,9 @@ class TextNodeConversion(unittest.TestCase):
 
     def test_image(self):
         node = TextNode("This is an image node", TextType.IMAGE)
-        html_node = node.text_node_to_html_node(props = {"src": "img/folder", "alt": "test image"})
+        html_node = node.text_node_to_html_node(
+            props={"src": "img/folder", "alt": "test image"}
+        )
         self.assertEqual(html_node.tag, "img")
         self.assertEqual(html_node.value, "This is an image node")
-        self.assertEqual(html_node.props, {"src":"img/folder", "alt":"test image"})
-
-
-
-
-
+        self.assertEqual(html_node.props, {"src": "img/folder", "alt": "test image"})
