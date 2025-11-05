@@ -5,8 +5,8 @@ from textnode import TextNode, TextType
 
 class TestTextNode(unittest.TestCase):
     def test_eq(self):
-        node = TextNode("This is a text node", TextType.BOLD_TEXT)
-        node2 = TextNode("This is a text node", TextType.BOLD_TEXT)
+        node = TextNode("This is a text node", TextType.BOLD)
+        node2 = TextNode("This is a text node", TextType.BOLD)
         self.assertEqual(node, node2)
 
     def test_noteq(self):
@@ -27,8 +27,8 @@ class TestTextNode(unittest.TestCase):
         self.assertNotEqual(node, node2)
 
     def test_differentType(self):
-        node = TextNode("Hello! I'm text!", TextType.BOLD_TEXT)
-        node2 = TextNode("Hello! I'm text!", TextType.ITALIC_TEXT)
+        node = TextNode("Hello! I'm text!", TextType.BOLD)
+        node2 = TextNode("Hello! I'm text!", TextType.ITALIC)
         self.assertNotEqual(node, node2)
 
 

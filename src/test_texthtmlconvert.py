@@ -11,19 +11,19 @@ class TextNodeConversion(unittest.TestCase):
         self.assertEqual(html_node.value, "This is a text node")
 
     def test_bold(self):
-        node = TextNode("This a bold node", TextType.BOLD_TEXT)
+        node = TextNode("This a bold node", TextType.BOLD)
         html_node = node.text_node_to_html_node()
         self.assertEqual(html_node.tag, "b")
         self.assertEqual(html_node.value, "This a bold node")
 
     def test_italic(self):
-        node = TextNode("This a italic node", TextType.ITALIC_TEXT)
+        node = TextNode("This a italic node", TextType.ITALIC)
         html_node = node.text_node_to_html_node()
         self.assertEqual(html_node.tag, "i")
         self.assertEqual(html_node.value, "This a italic node")
 
     def test_code(self):
-        node = TextNode("This a code node", TextType.CODE_TEXT)
+        node = TextNode("This a code node", TextType.CODE)
         html_node = node.text_node_to_html_node()
         self.assertEqual(html_node.tag, "code")
         self.assertEqual(html_node.value, "This a code node")

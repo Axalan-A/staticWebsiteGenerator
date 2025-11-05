@@ -4,9 +4,9 @@ from htmlnode import LeafNode
 
 class TextType(Enum):
     TEXT = "text"
-    BOLD_TEXT = "bold"
-    ITALIC_TEXT = "italic"
-    CODE_TEXT = "code"
+    BOLD = "bold"
+    ITALIC = "italic"
+    CODE = "code"
     LINK = "link"
     IMAGE = "image"
 
@@ -34,11 +34,11 @@ class TextNode:
         match self.text_type:
             case TextType.TEXT:
                 return LeafNode(None, self.text)
-            case TextType.BOLD_TEXT:
+            case TextType.BOLD:
                 return LeafNode("b", self.text)
-            case TextType.ITALIC_TEXT:
+            case TextType.ITALIC:
                 return LeafNode("i", self.text)
-            case TextType.CODE_TEXT:
+            case TextType.CODE:
                 return LeafNode("code", self.text)
             case TextType.LINK:
                 if props is not None:
