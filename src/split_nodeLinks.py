@@ -7,6 +7,9 @@ def split_nodes_image(old_nodes):
     for node in old_nodes:
         original_text = node.text
         properties = extract_markdown_images(node.text)
+        if node.text_type != TextType.TEXT:
+            new_nodes.append(node)
+            continue
         if len(properties) == 0:
             new_nodes.append(node)
             continue
@@ -21,7 +24,7 @@ def split_nodes_image(old_nodes):
         current_image = 0
         for section_index in range(len(sections)):
             section = sections[section_index]
-            if section_index != len(properties) - 1:
+            if section_index != len(sections) - 1:
                 if section != "":
                     new_nodes.append(TextNode(text=section, text_type=TextType.TEXT))
                 alt_text = properties[current_image][0]
@@ -41,6 +44,9 @@ def split_nodes_link(old_nodes):
     for node in old_nodes:
         original_text = node.text
         properties = extract_markdown_links(node.text)
+        if node.text_type != TextType.TEXT:
+            new_nodes.append(node)
+            continue
         if len(properties) == 0:
             new_nodes.append(node)
             continue
@@ -55,7 +61,7 @@ def split_nodes_link(old_nodes):
         current_image = 0
         for section_index in range(len(sections)):
             section = sections[section_index]
-            if section_index != len(properties) - 1:
+            if section_index != len(sections) - 1:
                 if section != "":
                     new_nodes.append(TextNode(text=section, text_type=TextType.TEXT))
                 anchor = properties[current_image][0]
