@@ -97,7 +97,7 @@ class TestSplitLinks(unittest.TestCase):
 
     def test_split_link_space(self):
         node = TextNode(
-            "This is text with two links! [link](https://i.imgur.com/zjjcJKZ.png) second link](https://i.imgur.com/3elNhQu.png)",
+            "This is text with two links! [link](https://i.imgur.com/zjjcJKZ.png) [second link](https://i.imgur.com/3elNhQu.png)",
             TextType.TEXT,
         )
         new_nodes = split_nodes_link([node])
