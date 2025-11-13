@@ -29,8 +29,8 @@ class TextNodeConversion(unittest.TestCase):
         self.assertEqual(html_node.value, "This a code node")
 
     def test_link(self):
-        node = TextNode("This a link node", TextType.LINK)
-        html_node = node.text_node_to_html_node(props={"href": "www.testlink.com"})
+        node = TextNode("This a link node", TextType.LINK, url="www.testlink.com")
+        html_node = node.text_node_to_html_node()
         self.assertEqual(html_node.tag, "a")
         self.assertEqual(html_node.value, "This a link node")
         self.assertEqual(html_node.props, {"href": "www.testlink.com"})
@@ -40,10 +40,8 @@ class TextNodeConversion(unittest.TestCase):
         self.assertRaises(Exception, lambda: node.text_node_to_html_node())
 
     def test_image(self):
-        node = TextNode("This is an image node", TextType.IMAGE)
-        html_node = node.text_node_to_html_node(
-            props={"src": "img/folder", "alt": "test image"}
-        )
+        node = TextNode("test image", TextType.IMAGE, url="img/folder")
+        html_node = node.text_node_to_html_node()
         self.assertEqual(html_node.tag, "img")
-        self.assertEqual(html_node.value, "This is an image node")
+        self.assertEqual(html_node.value, None)
         self.assertEqual(html_node.props, {"src": "img/folder", "alt": "test image"})

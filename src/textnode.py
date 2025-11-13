@@ -41,16 +41,16 @@ class TextNode:
             case TextType.CODE:
                 return LeafNode("code", self.text)
             case TextType.LINK:
-                if props is not None:
-                    return LeafNode("a", self.text, props={"href": props["href"]})
+                if self.url is not None:
+                    return LeafNode("a", self.text, props={"href": self.url})
                 else:
-                    raise Exception("Missing properties")
+                    raise ValueError("Missing link")
             case TextType.IMAGE:
-                if props is not None:
+                if self.text is not None and self.url is not None:
                     return LeafNode(
                         "img",
-                        self.text,
-                        props={"src": props["src"], "alt": props["alt"]},
+                        None,
+                        props={"alt": self.text, "src": self.url},
                     )
                 else:
-                    raise Exception("Missing properties")
+                    raise ValueError("Missing properties")
