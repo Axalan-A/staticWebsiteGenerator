@@ -15,7 +15,6 @@ This is another paragraph with _italic_ text and `code` here
 
         node = markdown_to_html_node(md)
         html = node.to_html()
-        print(html)
         self.assertEqual(
             html,
             "<div><p>This is <b>bolded</b> paragraph text in a p tag here</p><p>This is another paragraph with <i>italic</i> text and <code>code</code> here</p></div>",
@@ -35,4 +34,22 @@ the **same** even with inline stuff
     self.assertEqual(
         html,
         "<div><pre><code>This is text that _should_ remain\nthe **same** even with inline stuff\n</code></pre></div>",
+    )
+
+
+def test_headers(self):
+    md = """
+### This should be in a h3 tag.
+
+# This should be another in an h1 tag.
+
+
+###### This should be an h6
+"""
+
+    node = markdown_to_html_node(md)
+    html = node.to_html()
+    self.assertEqual(
+        html,
+        "<div><h3>This should be in a h3 tag.</h3><h1>This should be another in an h1 tag</h1><h6>This should be an h6</h6></div>",
     )
