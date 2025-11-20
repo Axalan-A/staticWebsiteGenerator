@@ -20,36 +20,65 @@ This is another paragraph with _italic_ text and `code` here
             "<div><p>This is <b>bolded</b> paragraph text in a p tag here</p><p>This is another paragraph with <i>italic</i> text and <code>code</code> here</p></div>",
         )
 
+    def test_codeblock(self):
+        md = """
+    ```
+    This is text that _should_ remain
+    the **same** even with inline stuff
+    ```
+    """
 
-def test_codeblock(self):
-    md = """
-```
-This is text that _should_ remain
-the **same** even with inline stuff
-```
-"""
+        node = markdown_to_html_node(md)
+        html = node.to_html()
+        self.assertEqual(
+            html,
+            "<div><pre><code>This is text that _should_ remain\nthe **same** even with inline stuff\n</code></pre></div>",
+        )
 
-    node = markdown_to_html_node(md)
-    html = node.to_html()
-    self.assertEqual(
-        html,
-        "<div><pre><code>This is text that _should_ remain\nthe **same** even with inline stuff\n</code></pre></div>",
-    )
-
-
-def test_headers(self):
-    md = """
+    def test_headers(self):
+        md = """
 ### This should be in a h3 tag.
 
 # This should be another in an h1 tag.
 
 
 ###### This should be an h6
-"""
+    """
 
-    node = markdown_to_html_node(md)
-    html = node.to_html()
-    self.assertEqual(
-        html,
-        "<div><h3>This should be in a h3 tag.</h3><h1>This should be another in an h1 tag</h1><h6>This should be an h6</h6></div>",
-    )
+        node = markdown_to_html_node(md)
+        html = node.to_html()
+        self.assertEqual(
+            html,
+            "<div><h3>This should be in a h3 tag.</h3><h1>This should be another in an h1 tag</h1><h6>This should be an h6</h6></div>",
+        )
+
+    def test_lists(self):
+        md = """
+    Grocery:
+    - Apple
+    - Cabbage
+    - Grocery list
+    """
+
+        node = markdown_to_html_node(md)
+        html = node.to_html()
+        self.assertEqual(
+            html,
+            "<div><ul>Grocery:<li>Apple</li>Cabbage<li>Grocery list</li></ul></div>",
+        )
+
+    def test_orderedlists(self):
+        print("Running!")
+        md = """
+    Grocery:
+    1. Apple
+    2. Cabbage
+    3. Grocery list
+    """
+
+        node = markdown_to_html_node(md)
+        html = node.to_html()
+        self.assertEqual(
+            html,
+            "<div><ol>Grocery:<li>Apple</li>Cabbage<li>Grocery list</li></ol></div>",
+        )
