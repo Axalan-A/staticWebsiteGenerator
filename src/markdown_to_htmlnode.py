@@ -1,11 +1,8 @@
-from multiprocessing import Value
-from typing import Text
 from htmlnode import ParentNode, LeafNode
 from markdown_to_blocks import markdown_to_blocks
 from blockType import BlockType, block_to_block_type
 from text_to_textnodes import text_to_textnodes
 from textnode import TextNode, TextType
-
 
 def text_to_children(text, list=False):
     text_nodes = text_to_textnodes(text.replace("\n", " ").strip())
