@@ -11,21 +11,39 @@ def text_to_children(text):
         leaves.append(node.text_node_to_html_node())
     return leaves
 
+def heading_to_block(block):
+    pass
+
+def quote_to_block(block):
+    pass
+
+def unordered_to_block(block):
+    pass
+
+def ordered_to_block(block):
+    pass
+
+def code_to_block(block):
+    pass
+
+def paragraph_to_block(block):
+    pass
+
 
 def block_to_node(block):
     block_type = block_to_block_type(block)
     if block_type == BlockType.HEADING:
-        pass
+        heading_to_block(block)
     elif block_type == BlockType.QUOTE:
-        pass
+        quote_to_block(block)
     elif block_type == BlockType.UNORDERED:
-        pass
+        unordered_to_block(block)
     elif block_type == BlockType.ORDERED:
-        pass
+        ordered_to_block(block)
     elif block_type == BlockType.CODE:
-        pass
+        code_to_block(block)
     elif block_type == BlockType.PARAGRAPH:
-        pass
+        paragraph_to_block(block)
     else:
         raise ValueError("Invalid Type")
 
