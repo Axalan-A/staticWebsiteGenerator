@@ -22,8 +22,8 @@ def heading_to_block(block):
 def quote_to_block(block):
     lines = block.split("\n")
     new_lines = "test"
-    for line in lines:
-        line = line[]
+    # for line in lines:
+    #     line = line[]
     # For each line, remove the > (should be the first character) then
     # rejoin the lines into a >-less string.
     
