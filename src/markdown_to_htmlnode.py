@@ -11,12 +11,22 @@ def text_to_children(text):
         leaves.append(node.text_node_to_html_node())
     return leaves
 
+
 def heading_to_block(block):
-    pass
+    # Split the block by space
+    sections = block.split(" ")
+    header_level = len(sections[0])
+    return ParentNode(tag = f"h{header_level}", children = text_to_children(block[1:-1]))
 
+# Every line of a quote block should begin with a >.
 def quote_to_block(block):
-    pass
-
+    lines = block.split("\n")
+    new_lines = "test"
+    for line in lines:
+        line = line[]
+    # For each line, remove the > (should be the first character) then
+    # rejoin the lines into a >-less string.
+    
 def unordered_to_block(block):
     pass
 
