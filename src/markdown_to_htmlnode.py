@@ -45,7 +45,18 @@ def unordered_to_block(block):
     return ParentNode(tag="ul", children = children)
 
 def ordered_to_block(block):
-    pass
+    # An ordered list will have the following characteristic:
+    # The first character of each line will consist of numbers counting up followed by a '.'
+    # e.g. 1. followed by 2. then 3. then 4. and so on.
+    #
+    # We split the text into lines, remove the number and tag each line as 'li' as above.
+    lines = block.split("\n")
+    children = []
+    for line in lines:
+        num_end = line.find(".")
+        children.append(ParentNode(tag = "li", children = text_to_children(text = line[num_end + 2:])))
+
+    return ParentNode(tag="ol", children=children)
 
 def code_to_block(block):
     pass
