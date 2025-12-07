@@ -33,7 +33,16 @@ def quote_to_block(block):
     # rejoin the lines into a >-less string.
 
 def unordered_to_block(block):
-    pass
+    # An unordered list will have the following characteristic:
+    # All lines must begin with the character '-'
+    #
+    # So split the text by lines and remove the first character.
+    # The children should all be tagged 'li'
+    lines = block.split("\n")
+    children = []
+    for line in lines:
+        children.append(ParentNode(tag = "li", children = text_to_children(line.replace("-", "", 1))))
+    return ParentNode(tag="ul", children = children)
 
 def ordered_to_block(block):
     pass
