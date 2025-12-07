@@ -21,12 +21,17 @@ def heading_to_block(block):
 # Every line of a quote block should begin with a >.
 def quote_to_block(block):
     lines = block.split("\n")
-    new_lines = "test"
+    cleaned_text = ""
+    for line in lines:
+        cleaned_text += line.replace(">", "", 1)
+
+    return ParentNode(tag = "quote", children = text_to_children(cleaned_text))
+
     # for line in lines:
     #     line = line[]
     # For each line, remove the > (should be the first character) then
     # rejoin the lines into a >-less string.
-    
+
 def unordered_to_block(block):
     pass
 
