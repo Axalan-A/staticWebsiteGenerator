@@ -89,5 +89,5 @@ the **same** even with inline stuff
         html = node.to_html()
         self.assertEqual(
             html,
-            "<p>Hello! Just a regular old paragraph here</p>",
+            "<div><p>Hello! Just a regular old paragraph here</p></div>",
         )
