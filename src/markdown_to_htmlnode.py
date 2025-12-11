@@ -16,7 +16,7 @@ def heading_to_block(block):
     # Split the block by space
     sections = block.split(" ")
     header_level = len(sections[0])
-    return ParentNode(tag = f"h{header_level}", children = text_to_children(block[1:-1]))
+    return ParentNode(tag = f"h{header_level}", children = text_to_children(block[header_level:]))
 
 # Every line of a quote block should begin with a >.
 def quote_to_block(block):
@@ -41,7 +41,8 @@ def unordered_to_block(block):
     lines = block.split("\n")
     children = []
     for line in lines:
-        children.append(ParentNode(tag = "li", children = text_to_children(line.replace("-", "", 1))))
+        cleaned_line = line.strip().replace("-", "", 1)
+        children.append(ParentNode(tag = "li", children = text_to_children(cleaned_line)))
     return ParentNode(tag="ul", children = children)
 
 def ordered_to_block(block):
@@ -59,26 +60,27 @@ def ordered_to_block(block):
     return ParentNode(tag="ol", children=children)
 
 def code_to_block(block):
-    pass
+    text = block[3:-3].lstrip()
+    return ParentNode(tag = "pre", children = [LeafNode(tag = "code", value =text)])
 
 def paragraph_to_block(block):
-    pass
+    return ParentNode(tag ="p", children = text_to_children(block))
 
 
 def block_to_node(block):
     block_type = block_to_block_type(block)
     if block_type == BlockType.HEADING:
-        heading_to_block(block)
+       return heading_to_block(block)
     elif block_type == BlockType.QUOTE:
-        quote_to_block(block)
+       return quote_to_block(block)
     elif block_type == BlockType.UNORDERED:
-        unordered_to_block(block)
+      return unordered_to_block(block)
     elif block_type == BlockType.ORDERED:
-        ordered_to_block(block)
+      return  ordered_to_block(block)
     elif block_type == BlockType.CODE:
-        code_to_block(block)
+      return  code_to_block(block)
     elif block_type == BlockType.PARAGRAPH:
-        paragraph_to_block(block)
+      return paragraph_to_block(block)
     else:
         raise ValueError("Invalid Type")
 
