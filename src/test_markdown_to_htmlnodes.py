@@ -22,11 +22,11 @@ This is another paragraph with _italic_ text and `code` here
 
     def test_codeblock(self):
         md = """
-    ```
-    This is text that _should_ remain
-    the **same** even with inline stuff
-    ```
-    """
+```
+This is text that _should_ remain
+the **same** even with inline stuff
+```
+"""
 
         node = markdown_to_html_node(md)
         html = node.to_html()
@@ -49,36 +49,45 @@ This is another paragraph with _italic_ text and `code` here
         html = node.to_html()
         self.assertEqual(
             html,
-            "<div><h3>This should be in a h3 tag.</h3><h1>This should be another in an h1 tag</h1><h6>This should be an h6</h6></div>",
+            "<div><h3>This should be in a h3 tag.</h3><h1>This should be another in an h1 tag.</h1><h6>This should be an h6</h6></div>",
         )
 
     def test_lists(self):
         md = """
-    Grocery:
-    - Apple
-    - Cabbage
-    - Grocery list
+- Apple
+- Cabbage
+- Grocery list
     """
 
         node = markdown_to_html_node(md)
         html = node.to_html()
         self.assertEqual(
             html,
-            "<div><ul>Grocery:<li>Apple</li>Cabbage<li>Grocery list</li></ul></div>",
+            "<div><ul><li>Apple</li><li>Cabbage</li><li>Grocery list</li></ul></div>",
         )
 
     def test_orderedlists(self):
         print("Running!")
         md = """
-    Grocery:
-    1. Apple
-    2. Cabbage
-    3. Grocery list
+1. Apple
+2. Cabbage
+3. Grocery list
     """
 
         node = markdown_to_html_node(md)
         html = node.to_html()
         self.assertEqual(
             html,
-            "<div><ol>Grocery:<li>Apple</li>Cabbage<li>Grocery list</li></ol></div>",
+            "<div><ol><li>Apple</li><li>Cabbage</li><li>Grocery list</li></ol></div>",
+        )
+
+    def test_orderedlists(self):
+        print("Running!")
+        md = """Hello! Just a regular old paragraph here"""
+
+        node = markdown_to_html_node(md)
+        html = node.to_html()
+        self.assertEqual(
+            html,
+            "<p>Hello! Just a regular old paragraph here</p>",
         )
