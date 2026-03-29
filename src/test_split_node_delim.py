@@ -32,4 +32,5 @@ class SplitDelimTests(unittest.TestCase):
             self.assertEqual(new_nodes, [
                 TextNode("This text", TextType.BOLD),
                 TextNode(" starts bold this time.", TextType.TEXT)
-            ])
+            ]
+)
