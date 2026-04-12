@@ -7,6 +7,7 @@ def split_nodes_images(old_nodes):
         text = node.text
         images = extract_markdown_images(node.text)
         if images == []:
+            new_nodes.append(node)
             continue
         for image in images:
             alt_text = image[0]
@@ -17,7 +18,7 @@ def split_nodes_images(old_nodes):
             new_nodes.append(TextNode(text=alt_text,text_type = TextType.IMAGE,url = image_url))
             text = splits[-1]
         if text != "":
-            new_nodes.append(TextNode(text= text[0],text_type = TextType.TEXT))
+            new_nodes.append(TextNode(text= text,text_type = TextType.TEXT))
     if new_nodes != []:
         return new_nodes
     else:
@@ -29,6 +30,7 @@ def split_nodes_links(old_nodes):
         text = node.text
         links = extract_markdown_links(node.text)
         if links == []:
+            new_nodes.append(node)
             continue
         for link in links:
             alt_text = link[0]
@@ -39,7 +41,7 @@ def split_nodes_links(old_nodes):
             new_nodes.append(TextNode(text=alt_text,text_type = TextType.LINK,url = link_url))
             text = splits[-1]
         if text != "":
-            new_nodes.append(TextNode(text= text[0],text_type = TextType.TEXT))
+            new_nodes.append(TextNode(text= text,text_type = TextType.TEXT))
     if new_nodes != []:
         return new_nodes
     else:
