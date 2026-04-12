@@ -21,4 +21,4 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type: TextType):
                new_node = TextNode(splits[index], TextType.TEXT)
 
             new_nodes.append(new_node)
-        return new_nodes
+    return new_nodes
