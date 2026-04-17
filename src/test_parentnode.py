@@ -4,7 +4,7 @@ from parentnode import ParentNode
 from leafnode import LeafNode
 
 class TestParentNode(unittest.TestCase):
-    def children_tohtml_test(self):
+    def children_to_html_test(self):
         node = node = ParentNode(
             "p",
             [
