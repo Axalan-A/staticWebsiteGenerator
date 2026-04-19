@@ -8,40 +8,38 @@ from textnode_to_htmlnode import text_node_to_html_node
 
 def strip_text(text: str, type: BlockType) -> str:
     if type.name == "PARAGRAPH":
-        return text
-    elif type.name == "HEADER":
+        split_lines = text.split("\n")
+        split_lines = list(map(lambda text: text.strip(), split_lines))
+        joined_string = " ".join(split_lines)
+        return joined_string
+    elif type.name == "HEADING":
         split_text = text.split(" ")
         stripped_text = " ".join(split_text[1:])
         return stripped_text
     elif type.name == "CODE":
-        return text[4:-3].strip()
+        return text[4:-3]
     elif type.name == "QUOTE":
-        return text[1:]
+        return text[1:].replace("\n", " ").strip()
     elif type.name =="UNORDERED_LIST":
         split_text = text.split("\n")
         stripped_text = list(map(lambda text : text[2:], split_text)) # Remove the starting "- "
         return "\n".join(stripped_text)
-    elif type.name =="ORDERED_LIST":
+    else:
         split_text = text.split("\n")
         stripped_text = list(map(lambda text : text[3:], split_text)) # Remove the starting "x. "
         return "\n".join(stripped_text)
-    else:
-        split_lines = text.split("\n")
-        split_lines = map(lambda text: text.strip(), split_lines)
-        joined_string = " ".join(split_lines)
-        return joined_string
 
 def text_to_list_items(text:str) -> list[ParentNode]:
-    split_list = text.strip("\n")
+    split_list = text.split("\n")
     list_items = []
-    for item in list_items:
-        text_nodes = text_to_textnodes(text)
+    for item in split_list:
+        text_nodes = text_to_textnodes(item)
         leaf_nodes = list(map(text_node_to_html_node, text_nodes))
         list_items.append(ParentNode(tag = "li", children = leaf_nodes))
     return list_items
 
 def text_to_children(text: str, type: BlockType):
-    if type.name == "HEADER":
+    if type.name == "HEADING":
         text_nodes = text_to_textnodes(strip_text(text, type))
         leaf_nodes = map(text_node_to_html_node, text_nodes)
         return list(leaf_nodes)
@@ -56,9 +54,10 @@ def text_to_children(text: str, type: BlockType):
     else:
         text_nodes = text_to_textnodes(strip_text(text, type))
         leaf_nodes = map(text_node_to_html_node, text_nodes)
+        return list(leaf_nodes)
 
 
-def markdown_to_html_node(markdown: str) -> str:
+def markdown_to_html_node(markdown: str) -> ParentNode:
     blocks = markdown_to_blocks(markdown)
     children = []
     for block in blocks:
@@ -69,7 +68,7 @@ def markdown_to_html_node(markdown: str) -> str:
             node = ParentNode(tag = f"h{header_level}", children = text_to_children(block, type))
         elif type == BlockType.CODE:
             code_node = text_node_to_html_node(TextNode(text_type = TextType.TEXT, text = strip_text(block, type)))
-            node = ParentNode(tag = "pre", children = [ParentNode(tag = "code", children = code_node)])
+            node = ParentNode(tag = "pre", children = [ParentNode(tag = "code", children = [code_node])])
         elif type == BlockType.QUOTE:
             node = ParentNode(tag = "blockquote", children = text_to_children(block, type))
         elif type == BlockType.UNORDERED_LIST:
@@ -81,4 +80,4 @@ def markdown_to_html_node(markdown: str) -> str:
 
         children.append(node)
     parent_node = ParentNode(tag = "div", children = children)
-    return parent_node.to_html()
+    return parent_node
