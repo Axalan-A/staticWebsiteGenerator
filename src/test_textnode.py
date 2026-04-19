@@ -10,18 +10,18 @@ class TestTextNode(unittest.TestCase):
         self.assertEqual(node, node2)
 
     def test_bad_url(self):
-        node = TextNode("This is a test node", "link", "hello.com")
-        node2 = TextNode("This is a test node", "link")
+        node = TextNode("This is a test node", TextType.LINK, "hello.com")
+        node2 = TextNode("This is a test node", TextType.LINK)
         self.assertNotEqual(node, node2)
 
     def test_bad_type(self):
-        node = TextNode("testing node", "bold")
-        node2 = TextNode("testing node", "italic")
+        node = TextNode("testing node", TextType.BOLD)
+        node2 = TextNode("testing node", TextType.ITALIC)
         self.assertNotEqual(node, node2)
 
     def test_bad_text(self):
-        node = TextNode("testing node", "bold")
-        node2 = TextNode("testing bold", "bold")
+        node = TextNode("testing node", TextType.BOLD)
+        node2 = TextNode("testing bold",TextType.BOLD)
         self.assertNotEqual(node, node2)
 
 
