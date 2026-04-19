@@ -6,7 +6,10 @@ class LeafNode(HTMLNode):
         super().__init__(tag, value, None, props)
 
     def to_html(self):
-        return f"<{self.tag}>{self.value}</{self.tag}>"
+        if self.tag != None:
+            return f"<{self.tag}>{self.value}</{self.tag}>"
+        else:
+            return self.value
 
     def __repr__(self):
         return f'LeafNode("{self.tag}", "{self.value}", {self.props})'
