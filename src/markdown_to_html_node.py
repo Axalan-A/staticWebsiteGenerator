@@ -1,5 +1,4 @@
 from block_to_blocktype import BlockType, block_to_block_type
-from leafnode import LeafNode
 from markdown_to_blocks import markdown_to_blocks
 from parentnode import ParentNode
 from text_to_textnodes import text_to_textnodes
