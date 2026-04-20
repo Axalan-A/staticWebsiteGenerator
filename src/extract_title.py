@@ -1,6 +1,6 @@
-from src.block_to_blocktype import BlockType, block_to_block_type
-from src.markdown_to_blocks import markdown_to_blocks
-from src.markdown_to_html_node import strip_text
+from block_to_blocktype import BlockType, block_to_block_type
+from markdown_to_blocks import markdown_to_blocks
+from markdown_to_html_node import strip_text
 
 
 def extract_title(markdown):
