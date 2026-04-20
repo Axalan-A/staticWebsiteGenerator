@@ -1,9 +1,3 @@
-# The goal here is to take everything within the static folder into the public folder
-# The steps are:
-# Delete the contents of the public folder
-# Copy all files, subdirectiories and nested files from static into public
-# Possibly log all actions for debugging purposes
-
 import os
 import shutil
 
