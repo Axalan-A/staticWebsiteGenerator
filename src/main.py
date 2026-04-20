@@ -1,5 +1,6 @@
 import os
 import shutil
+import sys
 
 from generate_page import generate_page, generate_page_recursive
 
@@ -19,9 +20,13 @@ def copy_site_files(path, target):
             shutil.copy(current_path, destination_path)
 
 # Loop through all files/folders in public:
-shutil.rmtree("public")
-os.mkdir("public")
+shutil.rmtree("docs")
+os.mkdir("docs")
 
-copy_site_files("static", "public")
-# generate_page("content/index.md", "template.html", "public/index.html")
-generate_page_recursive("content/", "template.html", "public/")
+if len(sys.argv) == 1:
+    basepath = "/"
+else:
+    basepath = sys.argv[1]
+
+copy_site_files("static", "docs")
+generate_page_recursive("content/", "template.html", "docs/", basepath)
