@@ -19,7 +19,10 @@ def strip_text(text: str, type: BlockType) -> str:
     elif type.name == "CODE":
         return text[4:-3]
     elif type.name == "QUOTE":
-        return text[1:].replace("\n", " ").strip()
+        lines = text.split("\n")
+        stripped_lines = list(map(lambda line: line[1:].lstrip(), lines))
+        stripped_text = "\n".join(stripped_lines)
+        return stripped_text
     elif type.name =="UNORDERED_LIST":
         split_text = text.split("\n")
         stripped_text = list(map(lambda text : text[2:], split_text)) # Remove the starting "- "
