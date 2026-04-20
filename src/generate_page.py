@@ -22,9 +22,10 @@ def generate_page(from_path, template_path, dest_path):
     dest_folder = os.path.dirname(dest_path)
     if not os.path.exists(dest_folder):
         os.makedirs(dest_folder)
-    else:
-        with open(dest_path, "x") as output_html:
-            output_html.write(output_text)
+    print(f"Generating page: {from_path}\nTo: {dest_path}")
+    with open(dest_path, "x") as output_html:
+        output_html.write(output_text)
+
 def generate_page_recursive(dir_path_content, template_path, dest_dir_path):
     for entry in os.listdir(dir_path_content):
         target = os.path.join(dir_path_content, entry)
