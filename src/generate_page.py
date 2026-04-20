@@ -18,8 +18,8 @@ def generate_page(from_path, template_path, dest_path, basepath):
 
     output_text = template_text.replace("{{ Title }}", webpage_title)
     output_text = output_text.replace("{{ Content }}", markdown_as_html)
-    output_text = output_text.replace("href=\"/", f"href=\"{basepath}")
-    output_text = output_text.replace("src=\"/", f"src=\"{basepath}")
+    output_text = output_text.replace("href=\"", f"href=\"{basepath}")
+    output_text = output_text.replace("src=\"", f"src=\"{basepath}")
 
     dest_folder = os.path.dirname(dest_path)
     if not os.path.exists(dest_folder):
