@@ -7,9 +7,7 @@
 import os
 import shutil
 
-# Loop through all files/folders in public:
-shutil.rmtree("public")
-os.mkdir("public")
+from generate_page import generate_page
 
 def copy_site_files(path, target):
     # Now, look through static and begin copying
@@ -26,4 +24,9 @@ def copy_site_files(path, target):
             print(f"Copying file {current_path} to {destination_path}")
             shutil.copy(current_path, destination_path)
 
+# Loop through all files/folders in public:
+shutil.rmtree("public")
+os.mkdir("public")
+
 copy_site_files("static", "public")
+generate_page("content/index.md", "template.html", "public/index.html")
