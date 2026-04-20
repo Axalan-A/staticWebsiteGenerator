@@ -4,7 +4,7 @@ from extract_title import extract_title
 from markdown_to_html_node import markdown_to_html_node
 
 
-def generate_page(from_path, template_path, dest_path):
+def generate_page(from_path, template_path, dest_path, basepath):
     # Read in the markdown file from "from_path"
     with open(from_path) as markdown_file:
         markdown_text = markdown_file.read()
@@ -18,6 +18,8 @@ def generate_page(from_path, template_path, dest_path):
 
     output_text = template_text.replace("{{ Title }}", webpage_title)
     output_text = output_text.replace("{{ Content }}", markdown_as_html)
+    output_text = output_text.replace("href=\"/", f"href=\"{basepath}")
+    output_text = output_text.replace("src=\"/", f"src=\"{basepath}")
 
     dest_folder = os.path.dirname(dest_path)
     if not os.path.exists(dest_folder):
@@ -26,13 +28,13 @@ def generate_page(from_path, template_path, dest_path):
     with open(dest_path, "x") as output_html:
         output_html.write(output_text)
 
-def generate_page_recursive(dir_path_content, template_path, dest_dir_path):
+def generate_page_recursive(dir_path_content, template_path, dest_dir_path, basepath):
     for entry in os.listdir(dir_path_content):
         target = os.path.join(dir_path_content, entry)
         if not os.path.isfile(target):
             new_dest_dir = os.path.join(dest_dir_path, entry)
-            generate_page_recursive(target, template_path, new_dest_dir)
+            generate_page_recursive(target, template_path, new_dest_dir, basepath)
     markdown_files = Path(dir_path_content).glob('*.md')
     for file in markdown_files:
         file_dest = os.path.join(dest_dir_path, "index.html")
-        generate_page(file, template_path, file_dest)
+        generate_page(file, template_path, file_dest, basepath)
