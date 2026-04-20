@@ -57,3 +57,11 @@ class ExtractionTests(unittest.TestCase):
             ],
             new_nodes
         )
+
+    def test_tolkien(self):
+        node = TextNode("![JRR Tolkien sitting](/images/tolkien.png)", TextType.TEXT)
+        new_nodes = split_nodes_images([node])
+        self.assertListEqual(
+            [TextNode("JRR Tolkien sitting", url = "/images/tolkien.png", text_type=TextType.IMAGE)],
+            new_nodes
+        )
