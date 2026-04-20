@@ -7,7 +7,7 @@
 import os
 import shutil
 
-from generate_page import generate_page
+from generate_page import generate_page, generate_page_recursive
 
 def copy_site_files(path, target):
     # Now, look through static and begin copying
@@ -29,4 +29,5 @@ shutil.rmtree("public")
 os.mkdir("public")
 
 copy_site_files("static", "public")
-generate_page("content/index.md", "template.html", "public/index.html")
+# generate_page("content/index.md", "template.html", "public/index.html")
+generate_page_recursive("content/", "template.html", "public/")
